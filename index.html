@@ -47,7 +47,7 @@
       const totalSlides = slides.length;
 
       function updateSlider() {
-          const offset = -currentIndex * 1000;
+          const offset = -currentIndex * 1176.8;
           document.querySelector('.slider').style.transform = `translateX(${offset}px)`;
       }
 
@@ -141,30 +141,46 @@
     </section>
 
     <section id="section3">
-      <form class="obratnuj-zvonok" id="callbackForm" autocomplete="off" /*action='email.php'*/ method='post'>
-          <div class="form-zvonok"> 
-            <div>
-              <label>Имя <span>*</span></label>
-              <input type='text' name='name' required>
-            </div>
-            <div>
-              <label>Номер телефона (с кодом) <span>*</span></label>
-              <input type='text' name='phone' required>
-            </div>
-            <div>
-              <label>Сообщение</label>
-              <input type='text' name='message'>
-            </div>
-            <div>
-              <label>Введите текст с картинки<span>*</span></label>
-              <input type='text' name='capcha' id='capchaInput' required>
-            </div>
-            <img src="img/capcha.jpg" class="pic" alt="Капча">
-            <input class="bot-send-mail" type='submit' value='Послать заявку'>
-            <div id="error-message" style="color: red; display: none;">Ошибка: неверная капча!</div>
+      <form class="obratnuj-zvonok" id="callbackForm" autocomplete="off" method='post'>
+          <div class="form-zvonok">
+              <div>
+                  <label>Имя <span>*</span></label>
+                  <input type='text' name='name' required>
+              </div>
+              <div>
+                  <label>Номер телефона <span>*</span></label>
+                  <input type='text' name='phone' required>
+              </div>
+              <div>
+                  <label>Сообщение</label>
+                  <input type='text' name='message'>
+              </div>
+              <div>
+                  <label>Введите текст с картинки<span>*</span></label>
+                  <input type='text' name='capcha' id='capchaInput' required>
+              </div>
+              <img src="img/capcha.jpg" class="pic" alt="Капча">
+              <input class="bot-send-mail" type='submit' value='Послать заявку'>
+              <div id="error-message" style="color: red; display: none;">Ошибка: неверная капча!</div>
           </div>
       </form>
   </section>
+  
+  <script>
+      document.getElementById('callbackForm').onsubmit = function(event) {
+          event.preventDefault(); // Отменяем стандартное поведение формы
+  
+          const userCapcha = document.getElementById('capchaInput').value;
+          const correctCapcha = "4m49"; // Замените на правильный текст капчи
+  
+          if (userCapcha === correctCapcha) {
+              // Замените 'thank_you.html' на путь к вашей странице благодарности
+              window.location.href = 'thank_you.html';
+          } else {
+              document.getElementById('error-message').style.display = 'block'; // Показываем сообщение об ошибке
+          }
+      };
+  </script>
   
   <script src="script.js"></script>
 

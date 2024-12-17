@@ -9,6 +9,10 @@ document.getElementById('callbackForm').addEventListener('submit', function(even
         event.preventDefault();  // Отменить отправку формы
         document.getElementById('error-message').style.display = 'block';  // Показать сообщение об ошибке
     } else {
-        document.getElementById('error-message').style.display = 'none';  // Скрыть сообщение об ошибке (если есть)
+        // Если капча правильная, скрыть сообщение об ошибке (если есть)
+        document.getElementById('error-message').style.display = 'none';  
+        
+        // Перенаправление пользователя на другую страницу
+        window.location.href = 'thank_you.html';  // Убедитесь, что путь указан правильно
     }
 });
