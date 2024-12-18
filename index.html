@@ -141,7 +141,7 @@
     </section>
 
     <section id="section3">
-      <form class="obratnuj-zvonok" id="callbackForm" autocomplete="off" method='post'>
+      <form class="obratnuj-zvonok" id="callbackForm" autocomplete="off">
           <div class="form-zvonok">
               <div>
                   <label>Имя <span>*</span></label>
@@ -149,7 +149,7 @@
               </div>
               <div>
                   <label>Номер телефона <span>*</span></label>
-                  <input type='text' name='phone' required>
+                  <input type='tel' name='phone' required>
               </div>
               <div>
                   <label>Сообщение</label>
@@ -159,28 +159,51 @@
                   <label>Введите текст с картинки<span>*</span></label>
                   <input type='text' name='capcha' id='capchaInput' required>
               </div>
-              <img src="img/capcha.jpg" class="pic" alt="Капча">
+              <img src="" class="pic" alt="Капча" id="captchaImage">
               <input class="bot-send-mail" type='submit' value='Послать заявку'>
               <div id="error-message" style="color: red; display: none;">Ошибка: неверная капча!</div>
           </div>
       </form>
+      <div id="thankYouMessage" style="display: none;">
+          <h2>Спасибо за вашу заявку!</h2>
+          <p>Мы свяжемся с вами в ближайшее время.</p>
+      </div>
   </section>
   
   <script>
+      const captchas = [
+          { text: "4m49", image: "img/captcha1.jpg" },
+          { text: "smwm", image: "img/captcha2.jpg" },
+          { text: "bwjn", image: "img/captcha3.jpg" },
+          { text: "W68H", image: "img/captcha4.jpg" },
+          { text: "0096", image: "img/captcha5.jpg" }
+      ];
+  
+      function getRandomCaptcha() {
+          const randomIndex = Math.floor(Math.random() * captchas.length);
+          return captchas[randomIndex];
+      }
+  
+      let currentCaptcha = getRandomCaptcha();
+      document.getElementById('captchaImage').src = currentCaptcha.image;
+  
       document.getElementById('callbackForm').onsubmit = function(event) {
-          event.preventDefault(); // Отменяем стандартное поведение формы
+          event.preventDefault();
   
           const userCapcha = document.getElementById('capchaInput').value;
-          const correctCapcha = "4m49"; // Замените на правильный текст капчи
   
-          if (userCapcha === correctCapcha) {
-              // Замените 'thank_you.html' на путь к вашей странице благодарности
-              window.location.href = 'thank_you.html';
+          if (userCapcha === currentCaptcha.text) {
+              document.querySelector('.form-zvonok').style.display = 'none';
+              document.getElementById('thankYouMessage').style.display = 'block';
           } else {
-              document.getElementById('error-message').style.display = 'block'; // Показываем сообщение об ошибке
+              document.getElementById('error-message').style.display = 'block';
+              currentCaptcha = getRandomCaptcha();
+              document.getElementById('captchaImage').src = currentCaptcha.image;
+              document.getElementById('capchaInput').value = ''; // Очищаем поле для нового ввода
           }
       };
   </script>
+  
   
   <script src="script.js"></script>
 

@@ -50,7 +50,8 @@ nav a:hover {
 }
 
 body {
-  background: linear-gradient(to bottom, #060606, #272525); /* Градиент сверху вниз */
+  background: linear-gradient(to bottom, #070707, #272525); /* Градиент сверху вниз */
+  background-attachment: fixed;
   min-height: 100vh; /* Занимает 100% высоты вьюпорта */
   margin: 0; /* Сбрасываем стандартные отступы */
   color: white; /* Цвет текста */
